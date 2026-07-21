@@ -1,5 +1,5 @@
 {
-  "name": "autocat",
+  "name": "@autocat/core",
   "version": "1.0.0",
   "type": "module",
   "main": "./dist/index.js",
@@ -10,7 +10,8 @@
   "description": "",
   "scripts": {
     "dev": "tsx watch",
-    "build": "tsc"
+    "build": "tsc",
+    "distribute": "pnpm build && pnpm pack"
   },
   "keywords": [],
   "author": "",
