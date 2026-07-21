@@ -2,9 +2,9 @@ import { IAutoCatLogger } from "../log";
 import { AutoCatTask } from "../tasks";
 
 export class AutoCatPipeline<TStore> {
-    private tasks: AutoCatTask<TStore>[] = [];
-    private logger: IAutoCatLogger;
-    private name: string;
+    public readonly name: string;
+    public readonly logger: IAutoCatLogger;
+    private readonly tasks: AutoCatTask<TStore>[] = [];
 
     constructor(name: string, logger: IAutoCatLogger) {
         this.name = name;

@@ -1,4 +1,4 @@
-import { AutoCatLogger, AutoCatPipeline, AutoCatTask } from "../src";
+import { AutoCatLogger, AutoCatPipeline, AutoCatScheduler, AutoCatTask } from "../src";
 
 type StoreType = {
     text: string
@@ -34,7 +34,10 @@ pipeline.add((store, logger) => {
 
 
 
-pipeline.run({
-    text: "hello"
-})
+// pipeline.run({
+//     text: "hello"
+// })
 
+const scheduler = new AutoCatScheduler(pipeline, 1000, () => ({ text: "hello" }), new AutoCatLogger())
+
+scheduler.start()
