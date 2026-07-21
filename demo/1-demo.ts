@@ -1,4 +1,4 @@
-import { AutoCatLogger, AutoCatPipeline, AutoCatScheduler, AutoCatTask, AutoCatException } from "../src";
+import { ConsoleAutoCatLogger, AutoCatPipeline, AutoCatScheduler, AutoCatTask, AutoCatException } from "../src";
 
 type StoreType = {
     text: string
@@ -20,7 +20,7 @@ const taskFunction: AutoCatTask<StoreType> = (store, logger) => {
     return store
 }
 
-const pipeline = new AutoCatPipeline<StoreType>("test", new AutoCatLogger());
+const pipeline = new AutoCatPipeline<StoreType>("test", new ConsoleAutoCatLogger());
 
 pipeline.add((store, logger) => {
     logger.info(store.text)
@@ -31,7 +31,7 @@ pipeline.add((store, logger) => {
     return store
 })
     .add((store, logger) => {
-        throw new AutoCatException("error xyz", logger, { skipCurrentPipeline: false })
+        throw new AutoCatException("error xyz", logger, { skipCurrentPipeline: false, useWarningLog: false })
     }).add(afunction(3))
     .add(taskFunction)
 
@@ -41,6 +41,6 @@ pipeline.add((store, logger) => {
 //     text: "hello"
 // })
 
-const scheduler = new AutoCatScheduler(pipeline, 1000, () => ({ text: "hello" }), new AutoCatLogger())
+const scheduler = new AutoCatScheduler(pipeline, 1000, () => ({ text: "hello" }))
 
 scheduler.start()

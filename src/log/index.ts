@@ -5,17 +5,26 @@ export interface IAutoCatLogger {
     system(message: string): void;
 }
 
-export class AutoCatLogger implements IAutoCatLogger {
-    info(message: string) {
-        console.log(message);
+export class ConsoleAutoCatLogger implements IAutoCatLogger {
+    private format(level: string, message: string): string {
+        const timestamp = new Date().toISOString();
+
+        return `[${timestamp}] [${level}] ${message}`;
     }
-    warn(message: string) {
-        console.warn(message);
+
+    info(message: string): void {
+        console.info("\x1b[36m%s\x1b[0m", this.format("INFO", message));
     }
-    error(message: string) {
-        console.error(message);
+
+    warn(message: string): void {
+        console.warn("\x1b[33m%s\x1b[0m", this.format("WARN", message));
     }
-    system(message: string) {
-        console.log(`##system## ${message}`);
+
+    error(message: string): void {
+        console.error("\x1b[31m%s\x1b[0m", this.format("ERROR", message));
+    }
+
+    system(message: string): void {
+        console.log("\x1b[35m%s\x1b[0m", this.format("SYSTEM", message));
     }
 }
