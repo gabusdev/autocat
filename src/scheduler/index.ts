@@ -48,7 +48,11 @@ export class AutoCatScheduler<TStore> {
                 this.getStore()
             );
         } catch (error) {
-            //   this.getLogger().error(error);
+            if (error instanceof Error) {
+                this.getLogger().error(`Unhandled error in scheduler: ${error.name}: ${error.message}`);
+            } else {
+                this.getLogger().error(`Unhandled error in scheduler: ${error}`);
+            }
         } finally {
             this.running = false;
         }

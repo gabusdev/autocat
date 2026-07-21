@@ -1,4 +1,4 @@
-import { AutoCatLogger, AutoCatPipeline, AutoCatScheduler, AutoCatTask } from "../src";
+import { AutoCatLogger, AutoCatPipeline, AutoCatScheduler, AutoCatTask, AutoCatException } from "../src";
 
 type StoreType = {
     text: string
@@ -29,7 +29,10 @@ pipeline.add((store, logger) => {
 }).add((store, logger) => {
     logger.info(store.text)
     return store
-}).add(afunction(3))
+})
+    .add((store, logger) => {
+        throw new AutoCatException("error xyz", logger, { skipCurrentPipeline: false })
+    }).add(afunction(3))
     .add(taskFunction)
 
 
