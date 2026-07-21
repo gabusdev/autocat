@@ -43,4 +43,4 @@ pipeline.add((store, logger) => {
 
 const scheduler = new AutoCatScheduler(pipeline, 1000, () => ({ text: "hello" }))
 
-scheduler.start()
+scheduler.executeOnce()
