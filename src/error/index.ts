@@ -1,4 +1,4 @@
-import { IAutoCatLogger } from "../log";
+import { IAutoCatLogger } from "../log/index.js";
 
 export class AutoCatException extends Error {
     private logger: IAutoCatLogger

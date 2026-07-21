@@ -1,5 +1,5 @@
-import { IAutoCatLogger } from "../log";
-import { AutoCatPipeline } from "../pipeline";
+import { IAutoCatLogger } from "../log/index.js";
+import { AutoCatPipeline } from "../pipeline/index.js";
 
 export class AutoCatScheduler<TStore> {
     private timer?: number;

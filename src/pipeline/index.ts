@@ -1,6 +1,6 @@
-import { AutoCatException } from "../error";
-import { IAutoCatLogger } from "../log";
-import { AutoCatTask } from "../tasks";
+import { AutoCatException } from "../error/index.js";
+import { IAutoCatLogger } from "../log/index.js";
+import { AutoCatTask } from "../tasks/index.js";
 
 export class AutoCatPipeline<TStore> {
     public readonly name: string;
