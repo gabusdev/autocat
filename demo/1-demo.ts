@@ -4,13 +4,20 @@ type StoreType = {
     text: string
 }
 
-const afunction = (a: number): AutoCatTask<StoreType> => {
+const afunction = (a: number) => {
 
-    return (store, logger) => {
+    const z: AutoCatTask<StoreType> = (store, logger) => {
         store.text += a.toString()
         logger.info(store.text)
         return store
     }
+    return z
+}
+
+const taskFunction: AutoCatTask<StoreType> = (store, logger) => {
+    store.text += "zz"
+    logger.info(store.text)
+    return store
 }
 
 const pipeline = new AutoCatPipeline<StoreType>("test", new AutoCatLogger());
@@ -23,6 +30,7 @@ pipeline.add((store, logger) => {
     logger.info(store.text)
     return store
 }).add(afunction(3))
+    .add(taskFunction)
 
 
 
